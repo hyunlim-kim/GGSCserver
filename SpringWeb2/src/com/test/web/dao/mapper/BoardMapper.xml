@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--어떤 Dao와 연결되어있는지 정의하는 namespace -->
+<mapper namespace="com.test.web.dao.BoardDao">
+
+	<select id="selectBoard" parameterType="BoardBean" resultType="BoardBean">
+		SELECT
+			*
+		FROM
+			board
+		WHERE
+			ID = #{id}
+		
+
+
+	</select>
+	
+		<select id="selectBoardList" resultType="BoardBean">
+		SELECT
+			ID,
+			TITLE,
+			CONTENT,
+			REG_DATE AS resDate,
+			USER_ID AS userId
+		FROM
+			board
+		
+			
+	</select>
+	
+	
+	
+	
+		<!-- 회원가입 -->
+	<insert id="insertBoard" parameterType="BoardBean">
+		INSERT INTO board
+		(ID,
+		TITLE,
+		CONTENT,
+		REG_DATE,
+		USER_ID
+		)
+		VALUES
+		(
+		#{id},
+		#{title},
+		#{content},
+		#{regDate},
+		#{userId}
+		)
+		<!-- #{~~~~} 는 안에 있는 내용으로 데이터가 맵핑되서 Bean으로 들어감 !! -->
+
+	</insert>
+
+	<!-- 회원수정 -->
+	<update id="updateBoard" parameterType="BoardBean">
+		UPDATE board
+		SET
+			TITLE= #{title},
+			CONTENT = #{content},
+			REG_DATE= #{redDate}
+			USER_ID =#{userId}
+			<!-- 아이디는 바뀌면 안됨!! 그리고 아이디를 기준으로 하나만 바뀌어야 하므로 !!!!  -->
+		WHERE
+			ID = #{id}
+
+	</update>
+	
+	<!-- 회원삭제  -->
+	<delete id="deleteBoard" parameterType="BoardBean">
+	DELETE 
+	FROM board
+	WHERE 
+	ID = #{Id}
+	</delete>
+</mapper>
+
